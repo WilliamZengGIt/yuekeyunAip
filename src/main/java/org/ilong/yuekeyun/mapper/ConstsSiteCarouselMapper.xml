@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ilong.yuekeyun.mapper.ConstsSiteCarouselMapper">
+    <resultMap id="BaseResultMap" type="org.ilong.yuekeyun.bean.ConstsSiteCarousel">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="picture" property="picture" jdbcType="VARCHAR"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="weight" property="weight" jdbcType="INTEGER"/>
+        <result column="enable" property="enable" jdbcType="INTEGER"/>
+        <result column="createTime" property="createTime" jdbcType="DATE"/>
+        <result column="createUser" property="createUser" jdbcType="VARCHAR"/>
+        <result column="updateTime" property="updateTime" jdbcType="DATE"/>
+        <result column="updateUser" property="updateUser" jdbcType="VARCHAR"/>
+        <result column="del" property="del" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="All_Columns">
+		name, picture, url, weight, enable, create_time, create_user,
+		update_time, update_user, del, id
+	</sql>
+
+    <select id="queryCarousels" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT
+        <include refid="All_Columns" />
+        FROM t_consts_site_carousel
+        WHERE enable = 1
+        ORDER BY weight DESC
+        LIMIT 0 , #{count}
+    </select>
+    <select id="getTotalItemsCount" parameterType="org.ilong.yuekeyun.bean.ConstsSiteCarousel" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM t_consts_site_carousel
+		WHERE del = 0
+	</select>
+
+    <select id="queryPage" resultType="org.ilong.yuekeyun.bean.ConstsSiteCarousel">
+        SELECT
+        <include refid="All_Columns" />
+        FROM t_consts_site_carousel
+        WHERE del = 0
+        ORDER BY id
+        LIMIT #{param2.startIndex, jdbcType=INTEGER} , #{param2.pageSize, jdbcType=INTEGER}
+    </select>
+
+    <select id="getById" parameterType="java.lang.Long" resultType="org.ilong.yuekeyun.bean.ConstsSiteCarousel">
+        SELECT
+        <include refid="All_Columns"  />
+        FROM t_consts_site_carousel
+        WHERE id = #{id, jdbcType=INTEGER}
+    </select>
+
+    <insert id="create" parameterType="org.ilong.yuekeyun.bean.ConstsSiteCarousel" flushCache="true"  useGeneratedKeys="true" keyProperty="id"  >
+		INSERT INTO t_consts_site_carousel
+		( name, picture, url, weight, enable, create_time, create_user,
+		update_time, update_user, del, id )
+		VALUES
+		( #{name, jdbcType=VARCHAR}, #{picture, jdbcType=VARCHAR}, #{url, jdbcType=VARCHAR}, #{weight, jdbcType=INTEGER}, #{enable, jdbcType=TINYINT}, #{createTime, jdbcType=DATE}, #{createUser, jdbcType=VARCHAR},
+		#{updateTime, jdbcType=TIMESTAMP}, #{updateUser, jdbcType=VARCHAR}, #{del, jdbcType=TINYINT}, #{id, jdbcType=INTEGER} )
+	</insert>
+
+    <update id="update" parameterType="org.ilong.yuekeyun.bean.ConstsSiteCarousel" flushCache="true">
+		UPDATE t_consts_site_carousel SET
+		name = #{name, jdbcType=VARCHAR},
+		picture = #{picture, jdbcType=VARCHAR},
+		url = #{url, jdbcType=VARCHAR},
+		weight = #{weight, jdbcType=INTEGER},
+		enable = #{enable, jdbcType=TINYINT},
+		update_time = #{updateTime, jdbcType=TIMESTAMP},
+		update_user = #{updateUser, jdbcType=VARCHAR}
+		WHERE id = #{id, jdbcType=INTEGER}
+	</update>
+
+    <insert id="createSelectivity" parameterType="org.ilong.yuekeyun.bean.ConstsSiteCarousel" flushCache="true"  useGeneratedKeys="true" keyProperty="id"  >
+        INSERT INTO t_consts_site_carousel
+        <trim prefix="(" suffix=")"  suffixOverrides="," >
+            <if test="name != null ">
+                name,
+            </if>
+            <if test="picture != null ">
+                picture,
+            </if>
+            <if test="url != null ">
+                url,
+            </if>
+            <if test="weight != null ">
+                weight,
+            </if>
+            <if test="enable != null ">
+                enable,
+            </if>
+            <if test="createTime != null ">
+                create_time,
+            </if>
+            <if test="createUser != null ">
+                create_user,
+            </if>
+            <if test="updateTime != null ">
+                update_time,
+            </if>
+            <if test="updateUser != null ">
+                update_user,
+            </if>
+            <if test="del != null ">
+                del,
+            </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")"  suffixOverrides="," >
+            <if test="name != null ">
+                #{name, jdbcType=VARCHAR},
+            </if>
+            <if test="picture != null ">
+                #{picture, jdbcType=VARCHAR},
+            </if>
+            <if test="url != null ">
+                #{url, jdbcType=VARCHAR},
+            </if>
+            <if test="weight != null ">
+                #{weight, jdbcType=INTEGER},
+            </if>
+            <if test="enable != null ">
+                #{enable, jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null ">
+                #{createTime, jdbcType=DATE},
+            </if>
+            <if test="createUser != null ">
+                #{createUser, jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null ">
+                #{updateTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null ">
+                #{updateUser, jdbcType=VARCHAR},
+            </if>
+            <if test="del != null ">
+                #{del, jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateSelectivity" parameterType="org.ilong.yuekeyun.bean.ConstsSiteCarousel" flushCache="true">
+        UPDATE t_consts_site_carousel
+        <trim prefix="SET" suffixOverrides="," >
+            <if test="name != null ">
+                name = #{name, jdbcType=VARCHAR},
+            </if>
+            <if test="picture != null ">
+                picture = #{picture, jdbcType=VARCHAR},
+            </if>
+            <if test="url != null ">
+                url = #{url, jdbcType=VARCHAR},
+            </if>
+            <if test="weight != null ">
+                weight = #{weight, jdbcType=INTEGER},
+            </if>
+            <if test="enable != null ">
+                enable = #{enable, jdbcType=TINYINT},
+            </if>
+            <if test="updateTime != null ">
+                update_time = #{updateTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null ">
+                update_user = #{updateUser, jdbcType=VARCHAR},
+            </if>
+            <if test="del != null ">
+                del = #{del, jdbcType=TINYINT},
+            </if>
+        </trim>
+        WHERE id = #{id, jdbcType = INTEGER}
+
+    </update>
+
+    <delete id="delete" parameterType="org.ilong.yuekeyun.bean.ConstsSiteCarousel" >
+		DELETE FROM t_consts_site_carousel
+		WHERE id = #{id, jdbcType=INTEGER}
+	</delete>
+
+    <update id="deleteLogic" parameterType="org.ilong.yuekeyun.bean.ConstsSiteCarousel" flushCache="true">
+		UPDATE t_consts_site_carousel
+		SET del = 1
+		WHERE id = #{id, jdbcType=INTEGER}
+	</update>
+
+</mapper>
