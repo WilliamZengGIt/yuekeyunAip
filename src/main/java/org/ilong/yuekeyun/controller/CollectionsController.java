@@ -1,5 +1,6 @@
 package org.ilong.yuekeyun.controller;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.collections.CollectionUtils;
@@ -10,6 +11,7 @@ import org.ilong.yuekeyun.bean.UserCollections;
 import org.ilong.yuekeyun.service.UserCollectionsService;
 import org.ilong.yuekeyun.utils.HttpSessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,13 +27,13 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/collections")
-@ApiOperation("课程收藏相关接口")
+@Api(tags = "课程收藏相关接口")
 public class CollectionsController {
 
     @Autowired
     private UserCollectionsService userCollectionsService;
 
-    @RequestMapping("/doCollection/{courseId}")
+    @GetMapping("/doCollection/{courseId}")
     @ApiOperation("课程收藏接口")
     @ApiImplicitParam(name = "courseId", value = "被收藏课程id", defaultValue = "2", required = true)
     public RespBean doCollection(@PathVariable Long courseId) {
@@ -53,7 +55,7 @@ public class CollectionsController {
         }
     }
 
-    @RequestMapping("/isCollection/{courseId}")
+    @GetMapping("/isCollection/{courseId}")
     @ApiOperation("课程是否收藏接口")
     @ApiImplicitParam(name = "courseId", value = "被收藏课程id", defaultValue = "2", required = true)
     public RespBean isCollection(@PathVariable Long courseId) {

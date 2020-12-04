@@ -2,6 +2,7 @@ package org.ilong.yuekeyun.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 
@@ -28,8 +29,8 @@ import java.util.List;
  * @date 2020-11-30 11:32
  */
 @RestController
-@ApiOperation("用户关注操作相关接口")
 @RequestMapping("/follow")
+@Api(tags = "用户关注操作相关接口")
 public class FollowerController {
     @Autowired
     private UserFollowsService userFollowsService;

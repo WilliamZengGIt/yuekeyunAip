@@ -159,6 +159,8 @@ public class AuthUser extends BaseEntity implements UserDetails {
         return password;
     }
 
+    public String getTrueUsername(){return username;}
+
     @Override
     public String getUsername() {
         return mobile;

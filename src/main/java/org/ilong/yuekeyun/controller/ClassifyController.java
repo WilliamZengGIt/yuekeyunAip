@@ -1,6 +1,8 @@
 package org.ilong.yuekeyun.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.ilong.yuekeyun.bean.ConstsClassify;
 import org.ilong.yuekeyun.bean.RespBean;
 import org.ilong.yuekeyun.service.ConstsClassifyService;
@@ -20,19 +22,26 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/classify")
+@Api(tags = "课程分类相关接口")
 public class ClassifyController {
     @Autowired
     private ConstsClassifyService constsClassifyService;
 
     //根据id获取分类
     @GetMapping ( "/getById")
+    @ApiOperation("根据id获取分类")
     public RespBean getById(Long id){
         ConstsClassify constsClassify = constsClassifyService.getById(id);
         RespBean ok = RespBean.ok("", constsClassify);
         return ok;
     }
 
+    /**
+     * 获取全部课程分类
+     * @return
+     */
     @GetMapping("/getALLlassify")
+    @ApiOperation("获取全部课程分类")
     public RespBean getcALLlassify(){
          List<ConstsClassify> constsClassifies = constsClassifyService.queryAll();
          return  RespBean.ok("",constsClassifies);

@@ -12,33 +12,26 @@ import javax.naming.Name;
  * @date 2020-10-13 21:18
  */
 public enum ImgDir {
-    TouXiang(0, "头像路径"),
-    LunBoTu(1,"轮播图存储路径"),
-    KeChengTu(2,"课程图存储路径"),
-    KeChengVideo(3,"课程视频存储路径");
+    TouXiang(0),//"头像路径" ; ;
 
-    private Integer code;
-    private String name;
+    LunBoTu(1),//"轮播图存储路径",
 
-    ImgDir(Integer code, String name) {
-        this.code = code;
-        this.name = name;
-    }
+    KeChengTu(2),//"课程图存储路径"
+
+    KeChengVideo(3);//课程视频存储路径
+
+    private Integer value;
     public byte ItoByte(){
-        return this.code.byteValue();
+        return  this.value.byteValue();
     }
-    public Integer getCode() {
-        return code;
-    }
-
-    public void setCode(Integer code) {
-        this.code = code;
+    ImgDir(Integer value) {
+        this.value = value;
     }
 
-    public String getName() {
-        return name;
+    public Integer getValue() {
+        return value;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setValue(Integer value) {
+        this.value = value;
     }}

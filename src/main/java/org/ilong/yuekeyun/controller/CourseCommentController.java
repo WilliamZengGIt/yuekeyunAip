@@ -2,6 +2,8 @@ package org.ilong.yuekeyun.controller;
 
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.ilong.yuekeyun.bean.AuthUser;
 import org.ilong.yuekeyun.bean.CourseComment;
@@ -106,6 +108,7 @@ public class CourseCommentController {
      * @return
      */
     @PostMapping("/segment")
+    @ApiOperation("加载评论&答疑")
     public RespBean segment(@RequestBody CourseCommentRequest courseCommentRequest){
         TailPage<CourseComment> page = new TailPage<>();
         if(null == courseCommentRequest.getCourseComment().getCourseId()

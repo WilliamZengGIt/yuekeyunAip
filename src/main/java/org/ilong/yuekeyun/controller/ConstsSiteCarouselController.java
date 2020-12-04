@@ -1,5 +1,7 @@
 package org.ilong.yuekeyun.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.ilong.yuekeyun.bean.ConstsSiteCarousel;
 import org.ilong.yuekeyun.service.ConstsSiteCarouselService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/ConstsSiteCarousel")
+@Api(tags = "轮播图相关接口")
 public class ConstsSiteCarouselController {
 
     @Autowired
@@ -27,6 +30,7 @@ public class ConstsSiteCarouselController {
      * @return
      */
     @GetMapping("/queryCarousels")
+    @ApiOperation("获取 5个轮播图  按权重高低排序 和是否可用 1：可用 0：禁用")
     public List<ConstsSiteCarousel> queryCarousels(){
         return constsSiteCarouselService.queryCarousels(5);
     }

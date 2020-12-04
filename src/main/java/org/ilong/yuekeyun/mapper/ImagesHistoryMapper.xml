@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ilong.yuekeyun.mapper.ImagesHistoryMapper">
+    <resultMap id="BeanResultMap" type="org.ilong.yuekeyun.bean.ImagesHistory">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId"  jdbcType="INTEGER"/>
+        <result column="header" property="header" jdbcType="VARCHAR"/>
+        <result column="user_mobile" property="userMobile" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="DATE"/>
+        <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="DATE"/>
+        <result column="update_user" property="updateUser" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="del" property="del" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="All_Columns">
+       id, user_id,header,user_mobile,create_time,create_user,update_time,update_user,type,del
+    </sql>
+    <select id="getImagesHistoryByHeader" parameterType="java.lang.String" resultMap="BeanResultMap">
+        select
+        <include refid="All_Columns"/>
+        FROM t_images_history WHERE header=#{imgUrl}
+    </select>
+    <select id="queryAll" parameterType="org.ilong.yuekeyun.bean.ImagesHistory" resultType="org.ilong.yuekeyun.bean.ImagesHistory">
+        SELECT
+        <include refid="All_Columns" />
+        FROM t_images_history ORDER BY id
+    </select>
+    <select id="getTotalItemsCount" parameterType="org.ilong.yuekeyun.bean.ImagesHistory" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM t_images_history
+        <trim prefix="WHERE " prefixOverrides="AND |OR ">
+            <if test="user_id != null">
+                AND user_id = #{userId, jdbcType=INTEGER}
+            </if>
+            <if test="user_mobile != null">
+                AND user_mobile = #{userMobile, jdbcType=VARCHAR}
+            </if>
+            <if test="header != null">
+                AND header = #{header, jdbcType=INTEGER}
+            </if>
+            <if test="type !=null">
+                AND type=#{type, jdbcType=INTEGER}
+            </if>
+            AND del = 0
+        </trim>
+    </select>
+
+    <select id="queryPage" resultMap="BeanResultMap">
+        SELECT
+        <include refid="All_Columns" />
+        FROM t_images_history
+        WHERE del = 0
+        <if test="param1.user_id != null">
+            AND user_id =#{param1.userId}
+        </if>
+        <if test="param1.user_mobile != null">
+            AND user_mobile = #{param1.userMobile }
+        </if>
+        <if test="param1.type != null">
+            AND type = #{param1.type }
+        </if>
+        ORDER BY id
+        LIMIT #{param2.startIndex, jdbcType=INTEGER} , #{param2.pageSize, jdbcType=INTEGER}
+    </select>
+
+    <select id="getById" parameterType="java.lang.Long"  resultMap="BeanResultMap">
+        SELECT
+        <include refid="All_Columns"  />
+        FROM t_images_history
+        WHERE id = #{id, jdbcType=INTEGER}
+    </select>
+    <insert id="create" parameterType="org.ilong.yuekeyun.bean.ImagesHistory" flushCache="true"  useGeneratedKeys="true" keyProperty="id"  >
+		INSERT INTO t_images_history
+		( user_id, header, user_mobile,
+		 create_time, create_user, update_time, update_user,
+		 type,del)
+		VALUES
+		( #{userId,jdbcType=INTEGER}, #{header, jdbcType=VARCHAR}, #{userMobile, jdbcType=VARCHAR},
+		#{createTime, jdbcType=DATE}, #{createUser, jdbcType=VARCHAR}, #{updateTime, jdbcType=TIMESTAMP},
+		 #{updateUser, jdbcType=VARCHAR},#{type,jdbcType=TINYINT},#{del, jdbcType=TINYINT}
+		)
+	</insert>
+
+    <update id="update" parameterType="org.ilong.yuekeyun.bean.AuthUser" flushCache="true">
+    UPDATE t_images_history SET
+        user_id=#{userId,jdbcType=INTEGER},
+        header=#{header, jdbcType=VARCHAR},
+        user_mobile = #{userMobile, jdbcType=VARCHAR},
+		createTime=#{createTime, jdbcType=DATE},
+		createUser=#{createUser, jdbcType=VARCHAR},
+		updateTime=#{updateTime, jdbcType=TIMESTAMP},
+		updateUser=#{updateUser, jdbcType=VARCHAR},
+		type=#{type,jdbcType=TINYINT},
+		del=#{del, jdbcType=TINYINT},
+		WHERE id = #{id, jdbcType=INTEGER}
+    </update>
+
+    <delete id="delete" parameterType="org.ilong.yuekeyun.bean.AuthUser" >
+		DELETE
+		FROM t_images_history
+		WHERE id = #{id, jdbcType=INTEGER}
+	</delete>
+
+    <update id="deleteLogic" parameterType="org.ilong.yuekeyun.bean.AuthUser" flushCache="true">
+		UPDATE t_images_history
+		SET del = 1
+		WHERE id = #{id, jdbcType=INTEGER}
+	</update>
+
+</mapper>
