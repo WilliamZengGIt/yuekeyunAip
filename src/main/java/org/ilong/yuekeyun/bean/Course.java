@@ -9,7 +9,7 @@ import java.math.BigDecimal;
  * @date 2020-10-14 14:28
  */
 public class Course extends BaseEntity{
-    private Integer id;
+    private Long id;
     /**
      *课程名称
      **/
@@ -125,11 +125,11 @@ public class Course extends BaseEntity{
                 '}';
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

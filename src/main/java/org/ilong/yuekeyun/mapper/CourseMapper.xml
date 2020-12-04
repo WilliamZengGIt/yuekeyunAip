@@ -35,6 +35,43 @@
 		recommend, weight, study_count, create_time, create_user, update_time,
 		update_user, del, id
 	</sql>
+
+    <select id="queryList"  parameterType="org.ilong.yuekeyun.bean.dto.CourseQueryDto"  resultMap="BeanResultMap">
+        SELECT
+        <include refid="All_Columns" />
+        FROM t_course
+        <trim prefix="WHERE " prefixOverrides="AND |OR ">
+            <if test="type != null">
+                AND type = #{type, jdbcType=INTEGER}
+            </if>
+            <if test="classify != null">
+                AND classify = #{classify, jdbcType=INTEGER}
+            </if>
+            <if test="subClassify != null">
+                AND sub_classify = #{subClassify, jdbcType=INTEGER}
+            </if>
+            <if test="direction != null">
+                AND direction = #{direction, jdbcType=INTEGER}
+            </if>
+            <if test="username != null">
+                AND username = #{username, jdbcType=INTEGER}
+            </if>
+            <if test="free != null">
+                AND free = #{free, jdbcType=INTEGER}
+            </if>
+            <if test="onsale != null">
+                AND onsale = #{onsale, jdbcType=INTEGER}
+            </if>
+        </trim>
+        <if test="sortField != null">
+            ORDER BY ${sortField}  ${sortDirection}
+        </if>
+        <if test="start != null and end != null">
+            LIMIT #{start, jdbcType=INTEGER} , #{end, jdbcType=INTEGER}
+        </if>
+    </select>
+
+
     <select id="queryCourses" parameterType="org.ilong.yuekeyun.bean.dto.CourseDto" resultMap="BeanResultMap">
         SELECT
         <include refid="All_Columns"/>

@@ -1,10 +1,13 @@
 package org.ilong.yuekeyun.service.impl;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.ilong.yuekeyun.Enum.CourseEnum;
 import org.ilong.yuekeyun.bean.Course;
 import org.ilong.yuekeyun.bean.common.page.PageBean;
 import org.ilong.yuekeyun.bean.common.page.TailPage;
 import org.ilong.yuekeyun.bean.dto.CourseDto;
+import org.ilong.yuekeyun.bean.dto.CourseQueryDto;
 import org.ilong.yuekeyun.mapper.CourseMapper;
 import org.ilong.yuekeyun.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +26,18 @@ public class CourseServiceImpl implements CourseService {
 
     @Autowired
     CourseMapper courseMapper;
+
+    @Override
+    public List<Course> queryList(CourseQueryDto queryEntity){
+        if(null == queryEntity.getOnsale()){//是否上架
+            queryEntity.setOnsale(CourseEnum.ONSALE.value());
+        }
+        List<Course> list=courseMapper.queryList(queryEntity);
+
+        /*return entityDao.queryList(queryEntity);
+         */
+        return list;
+    }
 
     /**
      * 按条件获取指定数量的课程 按权重 weight排序

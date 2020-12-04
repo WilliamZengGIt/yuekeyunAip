@@ -5,7 +5,10 @@ import org.apache.commons.io.IOUtils;
 import org.ilong.yuekeyun.Enum.ImgDir;
 import org.ilong.yuekeyun.bean.AuthUser;
 import org.ilong.yuekeyun.utils.FastDFSClientUtil;
+import org.ilong.yuekeyun.utils.RedisUtil;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockMultipartFile;
@@ -23,14 +26,39 @@ class YuekeyunApplicationTests {
     @Autowired
     FastDFSClientUtil fastDFSClientUtil;
 
+    @Autowired
+    RedisUtil redisUtil;
+
     @Test
+    void contextLoads(){
+/*
+        Logger logger= LoggerFactory.getLogger(getClass());
+*/
+        /*redisUtil.set("test","test");
+        String test = (String)redisUtil.get("test");*/
+       /* redisUtil.del("test");*/
+        final boolean equals = redisUtil.get("f99a4c06-f979-4a4e-9c3f-0c57326f18c3").equals("d6yx");
+        System.out.println(equals);
+
+        Logger logger = LoggerFactory.getLogger(getClass());
+
+        logger.trace("这是trace日志");    //跟踪器日志
+        logger.debug("这是debug日志");  //调试日志
+        logger.info("这是info日志");    //自定义日志
+        logger.warn("这是warn日志");    //警告日志
+        logger.error("这是error日志");  //错误日志
+
+    }
+
+
+    /*@Test
     void contextLoads() {
-/*
+*//*
         fastDFSClientUtil.deleteFile("http://139.196.39.179/group1/M00/00/00/rBEGzl-FMxWADWYtAAFCLcAQFoE461.png");
-*/
-/*
+*//*
+*//*
         fastDFSClientUtil.deleteFile("http://139.196.39.179/group1/M00/00/00/rBEGzl-FNNKAYdBIAAFCLcAQFoE928.png");
-*/
+*//*
 
         try {
             File file= new File("D:\\6.jpg");
@@ -45,7 +73,7 @@ class YuekeyunApplicationTests {
 
 
 
-    }
+    }*/
   /*  @Test
     void contextLoads() {
          AuthUser authUser = new AuthUser();

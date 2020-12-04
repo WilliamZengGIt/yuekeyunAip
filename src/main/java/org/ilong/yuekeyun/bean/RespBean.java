@@ -29,10 +29,31 @@ public class RespBean {
     public static RespBean error(String msg, Object obj) {
         return new RespBean(500, msg, obj);
     }
+    public static RespBean error( Object obj) {
+        return new RespBean(500, obj);
+    }
+
+    public static RespBean error(Integer status){
+        return new RespBean(status);
+    }
+
+    public static RespBean UserIsEmpty(){
+        return RespBean.error("当前用户已失效，请重新登录！",401);
+    }
 
     private RespBean() {
     }
+    private RespBean(Integer status) {
+        this.status = status;
+    }
+    private RespBean(Object obj) {
+        this.obj = obj;
+    }
 
+    private RespBean(Integer status,Object obj) {
+        this.status = status;
+        this.obj = obj;
+    }
     private RespBean(Integer status, String msg, Object obj) {
         this.status = status;
         this.msg = msg;

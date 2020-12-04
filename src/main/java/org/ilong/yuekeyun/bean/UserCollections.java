@@ -8,6 +8,27 @@ package org.ilong.yuekeyun.bean;
  */
 public class UserCollections extends BaseEntity{
 
+    private Long id;
+
+    @Override
+    public String toString() {
+        return "UserCollections{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", classify=" + classify +
+                ", objectId=" + objectId +
+                ", tips='" + tips + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     /**
      *用户id
@@ -66,6 +87,7 @@ public class UserCollections extends BaseEntity{
     public void setName(String name) {
         this.name = name;
     }
+
 
 }
 

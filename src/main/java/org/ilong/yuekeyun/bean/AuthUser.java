@@ -1,5 +1,6 @@
 package org.ilong.yuekeyun.bean;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -14,7 +15,7 @@ import java.util.Date;
  */
 public class AuthUser extends BaseEntity implements UserDetails {
 
-    private Integer id;
+    private Long id;
     /**
      *登录用户名
      **/
@@ -28,6 +29,7 @@ public class AuthUser extends BaseEntity implements UserDetails {
     /**
      *密码
      **/
+    @JsonIgnore
     private String password;
 
     /**
@@ -177,11 +179,11 @@ public class AuthUser extends BaseEntity implements UserDetails {
         return true;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -375,6 +377,38 @@ public class AuthUser extends BaseEntity implements UserDetails {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    @Override
+    public String toString() {
+        return "AuthUser{" +
+                "id=" + id +
+                ", realname='" + realname + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", gender=" + gender +
+                ", header='" + header + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", type=" + type +
+                ", status=" + status +
+                ", birthday=" + birthday +
+                ", education='" + education + '\'' +
+                ", collegeCode='" + collegeCode + '\'' +
+                ", collegeName='" + collegeName + '\'' +
+                ", certNo='" + certNo + '\'' +
+                ", title='" + title + '\'' +
+                ", sign='" + sign + '\'' +
+                ", openId='" + openId + '\'' +
+                ", wechatId='" + wechatId + '\'' +
+                ", qq='" + qq + '\'' +
+                ", loginTime=" + loginTime +
+                ", ip='" + ip + '\'' +
+                ", province='" + province + '\'' +
+                ", city='" + city + '\'' +
+                ", district='" + district + '\'' +
+                ", weight=" + weight +
+                ", nickname='" + nickname + '\'' +
+                '}';
     }
 }
 

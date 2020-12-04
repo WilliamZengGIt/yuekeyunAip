@@ -4,6 +4,7 @@ import org.ilong.yuekeyun.bean.Course;
 import org.ilong.yuekeyun.bean.common.page.PageBean;
 import org.ilong.yuekeyun.bean.common.page.TailPage;
 import org.ilong.yuekeyun.bean.dto.CourseDto;
+import org.ilong.yuekeyun.bean.dto.CourseQueryDto;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public interface CourseService {
     /**
      *获取所有
      **/
-    /* List<Course> queryList(CourseQueryDto queryEntity);*/
+     List<Course> queryList(CourseQueryDto queryEntity);
     /**
      * 按条件获取指定数量的课程 按权重 weight排序
      */

@@ -4,7 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.ilong.yuekeyun.utils.BeanUtil;
 
 /**
- * TOOD
+ * 课程Dto
  *
  * @author long
  * @date 2020-10-14 17:00

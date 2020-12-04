@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.*;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -77,8 +78,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //配置URL安全规则
         http    // 过滤请求
                 .authorizeRequests()
-                // /index/请求头下 的请求不需要认证
-                .antMatchers("/index/**","/classify/**","/course/**")
+                // 路径下的文件不需要认证即可访问
+                .antMatchers("/index/**","/courseComment/**","/tools/identiry/**","/classify/**","/course/**","/webjars/springfox-swagger-ui","/webjars/springfox-swagger-ui/**")
                 .permitAll()
                 //所有的请求都要认证
                 .anyRequest().authenticated()
@@ -178,5 +179,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 });
 
     }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring()
+                .antMatchers("/swagger-ui.html")
+                .antMatchers("/v2/**")
+                .antMatchers("/swagger-resources/**");
     }
+    /* @Override
+    public void configure(WebSecurity web) throws Exception {
+
+    }*/
+
+}
 

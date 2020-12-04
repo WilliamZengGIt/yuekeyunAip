@@ -3,6 +3,7 @@ package org.ilong.yuekeyun.mapper;
 import org.ilong.yuekeyun.bean.Course;
 import org.ilong.yuekeyun.bean.common.page.TailPage;
 import org.ilong.yuekeyun.bean.dto.CourseDto;
+import org.ilong.yuekeyun.bean.dto.CourseQueryDto;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public interface CourseMapper {
      *根据条件获取所有，
      *queryEntity：查询条件；
      **/
-  /*  public List<Course> queryList(CourseQueryDto queryEntity);*/
+   public List<Course> queryList(CourseQueryDto queryEntity);
 
     /**
      *获取总数量

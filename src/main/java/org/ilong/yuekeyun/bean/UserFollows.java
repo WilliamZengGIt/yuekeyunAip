@@ -8,7 +8,7 @@ package org.ilong.yuekeyun.bean;
  */
 public class UserFollows extends BaseEntity{
 
-
+    private  Long id;
     /**
      *用户id
      **/
@@ -33,8 +33,22 @@ public class UserFollows extends BaseEntity{
         this.followId = followId;
     }
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
+    @Override
+    public String toString() {
+        return "UserFollows{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", followId=" + followId +
+                '}';
+    }
 }
 
 
