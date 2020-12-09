@@ -84,7 +84,7 @@
 		)
 	</insert>
 
-    <update id="update" parameterType="org.ilong.yuekeyun.bean.AuthUser" flushCache="true">
+    <update id="update" parameterType="org.ilong.yuekeyun.bean.ImagesHistory" flushCache="true">
     UPDATE t_images_history SET
         user_id=#{userId,jdbcType=INTEGER},
         header=#{header, jdbcType=VARCHAR},
@@ -94,17 +94,17 @@
 		updateTime=#{updateTime, jdbcType=TIMESTAMP},
 		updateUser=#{updateUser, jdbcType=VARCHAR},
 		type=#{type,jdbcType=TINYINT},
-		del=#{del, jdbcType=TINYINT},
+		del=#{del, jdbcType=TINYINT}
 		WHERE id = #{id, jdbcType=INTEGER}
     </update>
 
-    <delete id="delete" parameterType="org.ilong.yuekeyun.bean.AuthUser" >
+    <delete id="delete" parameterType="org.ilong.yuekeyun.bean.ImagesHistory" >
 		DELETE
 		FROM t_images_history
 		WHERE id = #{id, jdbcType=INTEGER}
 	</delete>
 
-    <update id="deleteLogic" parameterType="org.ilong.yuekeyun.bean.AuthUser" flushCache="true">
+    <update id="deleteLogic" parameterType="org.ilong.yuekeyun.bean.ImagesHistory" flushCache="true">
 		UPDATE t_images_history
 		SET del = 1
 		WHERE id = #{id, jdbcType=INTEGER}

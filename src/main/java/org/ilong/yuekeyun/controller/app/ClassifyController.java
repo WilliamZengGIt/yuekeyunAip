@@ -1,4 +1,4 @@
-package org.ilong.yuekeyun.controller;
+package org.ilong.yuekeyun.controller.app;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import io.swagger.annotations.Api;

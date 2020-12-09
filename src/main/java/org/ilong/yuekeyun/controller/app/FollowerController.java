@@ -1,4 +1,4 @@
-package org.ilong.yuekeyun.controller;
+package org.ilong.yuekeyun.controller.app;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;

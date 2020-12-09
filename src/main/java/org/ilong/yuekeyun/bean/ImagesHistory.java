@@ -1,7 +1,7 @@
 package org.ilong.yuekeyun.bean;
 
 /**
- * TOOD
+ * 图片操作历史类
  *
  * @author long
  * @date 2020-12-04 11:22

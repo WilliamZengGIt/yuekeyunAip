@@ -1,4 +1,4 @@
-package org.ilong.yuekeyun.controller;
+package org.ilong.yuekeyun.controller.app;
 
 import com.sun.org.apache.regexp.internal.RE;
 import io.swagger.annotations.Api;

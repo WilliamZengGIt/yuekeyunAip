@@ -1,4 +1,4 @@
-package org.ilong.yuekeyun.controller;
+package org.ilong.yuekeyun.controller.app;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;

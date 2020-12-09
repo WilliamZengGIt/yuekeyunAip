@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ilong.yuekeyun.mapper.VideoHistoryMapper">
+    <resultMap id="BeanResultMap" type="org.ilong.yuekeyun.bean.VideoHistory">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId"  jdbcType="INTEGER"/>
+        <result column="video_url" property="videoUrl" jdbcType="VARCHAR"/>
+        <result column="user_mobile" property="userMobile" jdbcType="VARCHAR"/>
+        <result column="course_id" property="courseId" jdbcType="INTEGER"/>
+        <result column="section_id" property="sectionId" jdbcType="INTEGER"/>
+        <result column="video_name" property="videoName" jdbcType="VARCHAR"/>
+        <result column="time" property="time" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="DATE"/>
+        <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="DATE"/>
+        <result column="update_user" property="updateUser" jdbcType="VARCHAR"/>
+        <result column="del" property="del" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="All_Columns">
+       id, user_id,user_mobile,course_id,section_id,video_url,video_name,time,create_time,create_user
+       ,update_time,update_user,del
+    </sql>
+    <select id="getVideoHistoryByVideoUrl" parameterType="java.lang.String" resultMap="BeanResultMap">
+        select
+        <include refid="All_Columns"/>
+        FROM t_video_history WHERE video_url=#{videoUrl}
+    </select>
+    <select id="queryAll" parameterType="org.ilong.yuekeyun.bean.VideoHistory" resultType="org.ilong.yuekeyun.bean.VideoHistory">
+        SELECT
+        <include refid="All_Columns" />
+        FROM t_video_history ORDER BY id
+    </select>
+    <select id="getTotalItemsCount" parameterType="org.ilong.yuekeyun.bean.VideoHistory" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM t_video_history
+        <trim prefix="WHERE " prefixOverrides="AND |OR ">
+            <if test="user_id != null">
+                AND user_id = #{userId, jdbcType=INTEGER}
+            </if>
+            <if test="user_mobile != null">
+                AND user_mobile = #{userMobile, jdbcType=VARCHAR}
+            </if>
+            <if test="video_url != null">
+                AND video_url = #{videoUrl, jdbcType=VARCHAR}
+            </if>
+            <if test="course_id !=null">
+                AND course_id=#{courseId, jdbcType=INTEGER}
+            </if>
+            <if test="section_id !=null">
+                AND section_id=#{sectionId, jdbcType=INTEGER}
+            </if>
+            <if test="video_name !=null">
+                AND video_name=#{videoName, jdbcType=VARCHAR}
+            </if>
+            <if test="time !=null">
+                AND time=#{time, jdbcType=VARCHAR}
+            </if>
+            AND del = 0
+        </trim>
+    </select>
+
+    <select id="queryPage" resultMap="BeanResultMap">
+        SELECT
+        <include refid="All_Columns" />
+        FROM t_video_history
+        WHERE del = 0
+        <if test="param1.user_id != null">
+            AND user_id =#{param1.userId}
+        </if>
+        <if test="param1.user_mobile != null">
+            AND user_mobile = #{param1.userMobile }
+        </if>
+        <if test="param1.course_id != null">
+            AND course_id = #{param1.courseId }
+        </if>
+        <if test="param1.section_id != null">
+            AND section_id = #{param1.sectionId }
+        </if>
+        <if test="param1.video_url != null">
+            AND video_url = #{param1.videoUrl }
+        </if>
+        <if test="param1.video_name != null">
+            AND video_name = #{param1.videoName }
+        </if>
+        <if test="param1.time != null">
+            AND time = #{param1.time }
+        </if>
+        ORDER BY id
+        LIMIT #{param2.startIndex, jdbcType=INTEGER} , #{param2.pageSize, jdbcType=INTEGER}
+    </select>
+
+    <select id="getById" parameterType="java.lang.Long"  resultMap="BeanResultMap">
+        SELECT
+        <include refid="All_Columns"  />
+        FROM t_video_history
+        WHERE id = #{id, jdbcType=INTEGER}
+    </select>
+
+    <insert id="create" parameterType="org.ilong.yuekeyun.bean.VideoHistory" flushCache="true"  useGeneratedKeys="true" keyProperty="id"  >
+		INSERT INTO t_video_history
+		( user_id, user_mobile, course_id,
+		 section_id, video_url, video_name, time,
+		 create_time,create_user,update_time,update_user,del)
+		VALUES
+		( #{userId,jdbcType=INTEGER}, #{userMobile, jdbcType=VARCHAR},
+		 #{courseId,jdbcType=INTEGER},#{sectionId,jdbcType=INTEGER},
+		#{videoUrl, jdbcType=VARCHAR},#{videoName, jdbcType=VARCHAR},
+		 #{time, jdbcType=VARCHAR},#{createTime, jdbcType=DATE},
+		  #{createUser, jdbcType=VARCHAR}, #{updateTime, jdbcType=TIMESTAMP},
+		 #{updateUser, jdbcType=VARCHAR},#{del, jdbcType=TINYINT}
+		)
+	</insert>
+
+    <update id="update" parameterType="org.ilong.yuekeyun.bean.VideoHistory" flushCache="true">
+    UPDATE t_video_history SET
+       #{userId,jdbcType=INTEGER}, #{userMobile, jdbcType=VARCHAR},
+		 #{courseId,jdbcType=INTEGER},#{sectionId,jdbcType=INTEGER},
+		#{videoUrl, jdbcType=VARCHAR},#{videoName, jdbcType=VARCHAR},
+		 #{time, jdbcType=VARCHAR},#{createTime, jdbcType=DATE},
+		  #{createUser, jdbcType=VARCHAR}, #{updateTime, jdbcType=TIMESTAMP},
+		 #{updateUser, jdbcType=VARCHAR},#{del, jdbcType=TINYINT}
+		type=#{type,jdbcType=TINYINT},
+		del=#{del, jdbcType=TINYINT}
+		WHERE id = #{id, jdbcType=INTEGER}
+    </update>
+
+    <delete id="delete" parameterType="org.ilong.yuekeyun.bean.VideoHistory" >
+		DELETE
+		FROM t_video_history
+		WHERE id = #{id, jdbcType=INTEGER}
+	</delete>
+
+    <update id="deleteLogic" parameterType="org.ilong.yuekeyun.bean.VideoHistory" flushCache="true">
+		UPDATE t_video_history
+		SET del = 1
+		WHERE id = #{id, jdbcType=INTEGER}
+	</update>
+</mapper>

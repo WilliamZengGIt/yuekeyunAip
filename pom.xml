@@ -57,9 +57,68 @@
             <artifactId>swagger-models</artifactId>
             <version>1.5.22</version>
         </dependency>
+        <!-- 上传视频截图依赖-->
+        <dependency>
+            <groupId>org.bytedeco</groupId>
+            <artifactId>javacv</artifactId>
+            <version>0.8</version>
+        </dependency>
+        <!--file转化为MultipartFile file的依赖-->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.4.9</version>
+        </dependency>
+        <!--导入ffmpeg，ffmpeg分为两部分：核心包、ffmpeg包两部分，ffmpeg包又分为Windows环境以及Linux环境，
+        同时又区分32位系统以及64位系统。针对于不同的运行环境要导入不同的包，这一点对于开发、测试环境
+        为Window而生产环境为Linux的情况，尤其要注意需要导入所有的包，使其在两种环境下都能够使用-->
+        <dependency>
+            <groupId>ws.schild</groupId>
+            <artifactId>jave-all-deps</artifactId>
+            <version>2.6.0</version>
+        </dependency>
 
+        <dependency>
+            <groupId>ws.schild</groupId>
+            <artifactId>jave-core</artifactId>
+            <version>2.4.5</version>
+        </dependency>
 
+        <!-- window32位 ffmpeg -->
+        <dependency>
+            <groupId>ws.schild</groupId>
+            <artifactId>jave-native-win32</artifactId>
+            <version>2.4.5</version>
+        </dependency>
+
+        <!-- window64位 ffmpeg -->
+        <dependency>
+            <groupId>ws.schild</groupId>
+            <artifactId>jave-native-win64</artifactId>
+            <version>2.4.5</version>
+        </dependency>
+
+        <!-- linux32位 ffmpeg -->
+        <dependency>
+            <groupId>ws.schild</groupId>
+            <artifactId>jave-native-linux32</artifactId>
+            <version>2.4.6</version>
+        </dependency>
+
+        <!-- linux64位 ffmpeg -->
+        <dependency>
+            <groupId>ws.schild</groupId>
+            <artifactId>jave-native-linux64</artifactId>
+            <version>2.4.6</version>
+        </dependency>
+    <!--    &lt;!&ndash;fastdfs依赖&ndash;&gt;
+        <dependency>
+            <groupId>net.oschina.zcx7878</groupId>
+            <artifactId>fastdfs-client-java</artifactId>
+            <version>1.27.0.0</version>
+        </dependency>-->
         <!-- https://mvnrepository.com/artifact/com.github.tobato/fastdfs-client -->
+       <!-- fastDfs客户端-->
         <dependency>
             <groupId>com.github.tobato</groupId>
             <artifactId>fastdfs-client</artifactId>
